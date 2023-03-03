@@ -1,288 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import * as cytoscape from 'cytoscape';
-import * as dagre from 'cytoscape-dagre'
+import * as cxtmenu from 'cytoscape-cxtmenu';
+import { elements } from '../models/elements'
+
+cytoscape.use(cxtmenu);
 
 
 @Component({
   selector: 'app-cytoscape-example',
-  template: `
-    <div id="cy"></div>
-  `,
+  templateUrl: './cytoscape-example.component.html',
   styleUrls: ['./cytoscape-example.component.css']
 })
-export class CytoscapeExampleComponent implements OnInit {
+export class CytoscapeExampleComponent implements AfterViewInit {
+  @ViewChild('cy') graphContainer?: ElementRef
 
-  elements = [
-    {
-      "data": {
-          "id": "Mortgage Loan",
-          "name": "Mortgage Loan",
-          "definition": "A mortgage loan is ...",
-          "semanticType": "Subject Area",
-          "visibility": 1,
-          "label": "Mortgage Loan",
-          "color": "red",
-          "size": 30,
-          "custom_property": "value"
-      }
-  },
-  {
-      "data": {
-          "id": "Loan",
-          "name": "Loan",
-          "definition": "...",
-          "semanticType": "Entity",
-          "visibility": 2,
-          "label": "Loan",
-          "color": "red",
-          "size": 30,
-          "custom_property": "value"
-      }
-  },
-  {
-      "data": {
-          "id": "Financial Instrument",
-          "name": "Financial Instrument",
-          "definition": "A Financial Instrument ...",
-          "semanticType": "Entity",
-          "visibility": 2,
-          "label": "Financial Instrument",
-          "color": "red",
-          "size": 30,
-          "custom_property": "value"
-      }
-  },
-{
-      "data": {
-          "id": "Adjustable Rate Mortgage",
-          "name": "Adjustable Rate Mortgage",
-          "definition": "A mortgage loan ...",
-          "semanticType": "Entity",
-          "visibility": 2,
-          "label": "Adjustable Rate Mortgage",
-          "color": "red",
-          "size": 30,
-          "custom_property": "value"
-      }
-  },{
-      "data": {
-          "id": "Fixed Rate Mortgage",
-          "name": "Fixed Rate Mortgage",
-          "definition": "A mortgage loan ...",
-          "semanticType": "Entity",
-          "visibility": 2,
-          "label": "Fixed Rate Mortgage",
-          "color": "red",
-          "size": 30,
-          "custom_property": "value"
-      }
-  },
-  {
-      "data": {
-          "id": "Reverse Mortgage",
-          "name": "Reverse Mortgage",
-          "definition": "...",
-          "semanticType": "Entity",
-          "visibility": 2,
-          "label": "Reverse Mortgage",
-          "color": "red",
-          "size": 30,
-          "custom_property": "value"
-      }
-  },
-  {
-      "data": {
-          "id": "Loan State",
-          "name": "Loan State",
-          "definition": "...",
-          "semanticType": "Phase",
-          "visibility": 2,
-          "label": "Loan State",
-          "color": "red",
-          "size": 30,
-          "custom_property": "value"
-      }
-  },
-  {
-      "data": {
-          "id": "Borrower",
-          "name": "Borrower",
-          "definition": "...",
-          "semanticType": "Role",
-          "visibility": 2,
-          "label": "Borrower",
-          "color": "red",
-          "size": 30,
-          "custom_property": "value"
-      }
-  },
-  {
-      "data": {
-          "id": "Real Property",
-          "name": "Real Property",
-          "definition": "...",
-          "semanticType": "Role",
-          "visibility": 2,
-          "label": "Real Property",
-          "color": "red",
-          "size": 30,
-          "custom_property": "value"
-      }
-  },
-  {
-      "data": {
-          "id": "Party Group",
-          "name": "Party Group",
-          "definition": "...",
-          "semanticType": "Entity",
-          "visibility": 2,
-          "label": "Party Group",
-          "color": "red",
-          "size": 30,
-          "custom_property": "value"
-      }
-  },
-  {
-      "data": {
-          "id": "Loan Seller",
-          "name": "Loan Seller",
-          "definition": "...",
-          "semanticType": "Role",
-          "visibility": 2,
-          "label": "Loan Seller",
-          "color": "red",
-          "size": 30,
-          "custom_property": "value"
-      }
-  },
-  {
-        "data": {
-            "id": "edge1",
-            "source": "Mortgage Loan",
-            "target": "Financial Instrument",
-            "label": "hasGeneral",
-            "color": "blue",
-            "width": 2,
-            "custom_property": "value"
-        }
-    },
-    {
-        "data": {
-            "id": "edge2",
-            "source": "Mortgage Loan",
-            "target": "Loan",
-            "label": "referencedBySubjectArea",
-            "color": "blue",
-            "width": 2,
-            "custom_property": "value"
-        }
-    },
-    {
-        "data": {
-            "id": "edge3",
-            "source": "Mortgage Loan",
-            "target": "Adjustable Rate Mortgage",
-            "label": "hasSpecific",
-            "color": "blue",
-            "width": 2,
-            "custom_property": "value"
-        }
-    },
-    {
-        "data": {
-            "id": "edge4",
-            "source": "Mortgage Loan",
-            "target": "Fixed Rate Mortgage",
-            "label": "hasSpecific",
-            "color": "blue",
-            "width": 2,
-            "custom_property": "value"
-        }
-    },
-    {
-        "data": {
-            "id": "edge5",
-            "source": "Mortgage Loan",
-            "target": "Reverse Mortgage",
-            "label": "hasSpecific",
-            "color": "blue",
-            "width": 2,
-            "custom_property": "value"
-        }
-    },
-    {
-        "data": {
-            "id": "edge6",
-            "source": "Mortgage Loan",
-            "target": "Loan State",
-            "label": "hasFacet",
-            "color": "blue",
-            "width": 2,
-            "custom_property": "value"
-        }
-    },
-    {
-        "data": {
-            "id": "edge7",
-            "source": "Mortgage Loan",
-            "target": "Borrower",
-            "label": "has debtor",
-            "color": "blue",
-            "width": 2,
-            "custom_property": "value"
-        }
-    },
-    {
-        "data": {
-            "id": "edge8",
-            "source": "Mortgage Loan",
-            "target": "Real Property",
-            "label": "is collateralized by",
-            "color": "blue",
-            "width": 2,
-            "custom_property": "value"
-        }
-    },
-    {
-        "data": {
-            "id": "edge9",
-            "source": "Mortgage Loan",
-            "target": "Party Group",
-            "label": "has responsible group",
-            "color": "blue",
-            "width": 2,
-            "custom_property": "value"
-        }
-    },
-    {
-        "data": {
-            "id": "edge10",
-            "source": "Mortgage Loan",
-            "target": "Loan Seller",
-            "label": "is sold by",
-            "color": "blue",
-            "width": 2,
-            "custom_property": "value"
-        }
-    },
-    {
-        "data": {
-            "id": "edge11",
-            "source": "Mortgage Loan",
-            "target": "Loan Seller",
-            "label": "also has a",
-            "color": "blue",
-            "width": 2,
-            "custom_property": "value"
-        }
-    }
-  ]
+  export() {}
+
+  searchQuery = '';
+  searchResults: any[] = [];
+
+  cy: any;
+
+  elements = elements
 
 
   constructor() {}
 
-  ngOnInit() {
-    const cy = cytoscape({
+  ngAfterViewInit() {
+    this.cy = cytoscape({
       container: document.getElementById('cy'),
       elements: this.elements,
       boxSelectionEnabled: true,
@@ -290,9 +35,22 @@ export class CytoscapeExampleComponent implements OnInit {
         {
           selector: 'node',
           style: {
-            'background-color': '#000000',
+            //'background-color': '#000',
             'label': 'data(label)',
-            'font-size': '25rem',
+            'font-size': '20rem',
+            'text-outline-color': '#000',
+            'width': '75rem',
+            'height': '75rem',
+            //'width': 'mapData(score, 0, .006769776522008331, 50, 60)',
+            //'height': 'mapData(score, 0, .006769776522008331, 50, 60)',
+            'content': 'data(name)',
+            'text-valign': 'center',
+            'text-halign': 'center',
+            'text-outline-width': '1.5rem',
+            'color': '#fff',
+            'overlay-padding': '6rem',
+            'z-index': 10,
+            'border-width': '3rem'
           }
         },
         {
@@ -301,21 +59,24 @@ export class CytoscapeExampleComponent implements OnInit {
             'curve-style': 'bezier',
             'label': 'data(label)',
             'width': 2,
-            'line-color': '#9dbaea',
+            //'line-color': '#9dbaea',
             'target-arrow-fill': 'filled',
-            'target-arrow-color': '#000000',
+            //'target-arrow-color': '#000000',
             'target-arrow-shape': 'triangle',
-            'font-size': '18rem',
+            'font-size': '12rem',
             'text-rotation': 'autorotate'
           }
         }
       ],
+      
+      minZoom: 0.5,
+      maxZoom:0.75,
+      
 
     });
 
     let options = {
       name: 'cose',
-      nodeDimensionsIncludeLabels: true,    
       // Called on `layoutready`
       ready: function(){},
     
@@ -351,13 +112,13 @@ export class CytoscapeExampleComponent implements OnInit {
       fit: true,
     
       // Padding on fit
-      padding: 30,
+      padding: 50,
     
       // Constrain layout bounds; { x1, y1, x2, y2 } or { x1, y1, w, h }
       boundingBox: undefined,
     
       // Excludes the label when calculating node bounding boxes for the layout algorithm
-      //nodeDimensionsIncludeLabels: false,
+      nodeDimensionsIncludeLabels: true,
     
       // Randomize the initial positions of the nodes (true) or use existing positions (false)
       randomize: false,
@@ -366,24 +127,24 @@ export class CytoscapeExampleComponent implements OnInit {
       componentSpacing: 40,
     
       // Node repulsion (non overlapping) multiplier
-      //nodeRepulsion: function( node ){ return 2048; },
+      nodeRepulsion: function( node: any ){ return 2048; },
     
       // Node repulsion (overlapping) multiplier
-      nodeOverlap: 4,
+      nodeOverlap: 7,
 
       cytoscapeEdgehandles: 1,
     
       // Ideal edge (non nested) length
-      idealEdgeLength: function( edge: cytoscape.EdgeCollection ){ return 32; },
+      idealEdgeLength: function( edge: any ){ return 32; },
     
       // Divisor to compute edge forces
-      //edgeElasticity: function( edge ){ return 32; },
+      edgeElasticity: function( edge: any ){ return 32; },
     
       // Nesting factor (multiplier) to compute ideal edge length for nested edges
       nestingFactor: 1.2,
     
       // Gravity force (constant)
-      gravity: 0,
+      gravity: 1,
     
       // Maximum number of iterations to perform
       numIter: 1000,
@@ -399,9 +160,89 @@ export class CytoscapeExampleComponent implements OnInit {
 
       
     };
-    const layout = cy.elements().layout(options);
+    const layout = this.cy.elements().layout(options);
 
     layout.run();
+
+    this.cy.cxtmenu({
+        selector: 'node',
+        commands: [
+          {
+            content: 'Edit',
+            select: function(ele: any){
+              // do something when "Edit" is clicked
+            }
+          },
+          {
+            content: 'Delete',
+            select: function(ele: any){
+                // do something when "Delete is clicked"
+                ele.remove();
+            }
+          }
+        ]
+      });
+
+
+    //selection styling
+    this.cy.on('select', 'node', function(e: any){
+        var node = e.target;
+        node.style('background-color', 'blue');
+        node.style('border-color', 'black');
+        node.style('border-width', '10px');
+        e.neigh
+      });
+      
+    this.cy.on('unselect', 'node', function(e: any){
+        var node = e.target;
+        node.removeStyle('background-color');
+        node.removeStyle('border-color');
+        node.removeStyle('border-width');
+      });
+    
+    //TODO: finish debugging drop down
+
+    //right click drop down menu 
+    this.cy.on('cxttap', 'node', function(e: any){
+        var node = e.target;
+        node.select();
+      });
+    
+    
+      
+  }
+  expandSelectedNode() {
+    // Get the selected node
+    const selectedNode = this.cy.$(':selected');
+  
+    // Get the immediate neighbors of the selected node
+    const neighbors = selectedNode.neighborhood();
+  
+    // Add the neighbor nodes to the graph
+    this.cy.add(neighbors);
+  
+    // Lay out the graph to show the new nodes
+    this.cy.layout({ name: 'cose' }).run();
+  }
+  searchNodes() {
+    const query = this.searchQuery.trim().toLowerCase();
+    if (query) {
+      this.searchResults = this.cy.nodes().filter((node: { id: () => string; }) => node.id().toLowerCase().includes(query));
+    } else {
+      this.searchResults = [];
+    }
   }
 
+  selectNode() {
+    if (this.searchResults.length > 0) {
+      const node = this.searchResults[0];
+      node.select();
+      this.cy.animate({
+        center: { eles: node },
+        duration: 1000
+      });
+    }
+  }
+  
+  
 }

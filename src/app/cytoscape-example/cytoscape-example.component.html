@@ -1,1 +1,10 @@
-<div id="cy"></div>
+<div id="cy">
+    <button (click)="expandSelectedNode()">Expand Selected Node</button>
+    <input type="text" [(ngModel)]="searchQuery" (keyup)="searchNodes()" />
+    <button (click)="selectNode()">Select Node</button>
+
+</div>
+
+
+
+  
