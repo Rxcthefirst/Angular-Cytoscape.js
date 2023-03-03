@@ -34,8 +34,8 @@
     "zone.js": "~0.12.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^15.1.5",
-    "@angular/cli": "~15.1.5",
+    "@angular-devkit/build-angular": "^15.2.1",
+    "@angular/cli": "~15.2.1",
     "@angular/compiler-cli": "^15.1.0",
     "@types/cytoscape": "^3.19.9",
     "@types/cytoscape-cxtmenu": "^3.4.0",
