@@ -1,0 +1,82 @@
+:host {
+    display: block;
+    width: 20%;
+    height: 100%;
+    background-color: whitesmoke;
+}
+
+.search-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 10px;
+    background-color: #f1f1f1;
+  }
+  
+  .search-container input[type="text"] {
+    padding: 5px 10px;
+    border: solid;
+    border-radius: 5px;
+    width: 50%;
+    font-size: 20px;
+    margin-top: 15px;
+  }
+  
+  .search-container button {
+    padding: 8px 40px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+  }
+
+  .tab-container {
+    display: flex;
+    justify-content: center;
+    align-items: top;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border: solid;
+  }
+  
+  .tab {
+    padding: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    border: solid;
+  }
+  
+  .tab.active {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .tab-content {
+    display: none;
+    padding: 10px;
+    background-color: #f9f9f9;
+    height:50%
+  }
+  
+  .tab-content.show {
+    display: block;
+  }
+
+  .filter-container {
+    height: 50%;
+    background-color: blanchedalmond;
+    text-align: center;
+  }
+
+  .bottom-container {
+    padding: 10px;
+    background-color: #f1f1f1;
+    height: 30%;
+    margin-bottom: 0px;
+    text-align: center;
+  }
+  
+  
+

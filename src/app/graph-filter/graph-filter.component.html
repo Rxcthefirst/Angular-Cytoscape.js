@@ -1,0 +1,29 @@
+<div class="search-container">
+    <input type="text" placeholder="Search...">
+    <button>Search</button>
+</div>
+
+<div class="tab-container">
+    <div class="tab" (click)="openTab('tab1')" [class.active]="activeTab === 'tab1'">Tab 1</div>
+    <div class="tab" (click)="openTab('tab2')" [class.active]="activeTab === 'tab2'">Tab 2</div>
+    <div class="tab" (click)="openTab('tab3')" [class.active]="activeTab === 'tab3'">Tab 3</div>
+  </div>
+
+  <div class="filter-container">
+    <div *ngIf="activeTab === 'tab1'">
+        <p>This is Tab 1 content.</p>
+  </div>
+  
+    <div *ngIf="activeTab === 'tab2'">
+        <p>This is Tab 2 content.</p>
+  </div>
+  
+    <div *ngIf="activeTab === 'tab3'">
+        <p>This is Tab 3 content.</p>
+    </div>
+  </div>
+
+  <div class="bottom-container">
+    <p>This is the bottom container.</p>
+  </div>
+  

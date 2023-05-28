@@ -1,0 +1,9 @@
+* {
+    display: grid;
+    justify-content: center;
+}
+
+.hero-image {
+    display: flex;
+    justify-content: center;
+}
