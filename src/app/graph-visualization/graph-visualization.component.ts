@@ -63,6 +63,7 @@ export class GraphVisualizationComponent implements OnInit, OnDestroy {
           this.cy.add({ data: friendEdge });
         })
       });
+
       let options = {
         name: 'fcose',
         nodeRepulsion: node => 45000,
@@ -77,9 +78,6 @@ export class GraphVisualizationComponent implements OnInit, OnDestroy {
       layout.run();
       }
       );
-      
-      
-    
 
     this.cy = cytoscape({
       container: document.getElementById('cy'),
@@ -221,7 +219,7 @@ export class GraphVisualizationComponent implements OnInit, OnDestroy {
     };
     
 
-    let options = {
+    /*let options = {
       name: 'fcose',
       nodeRepulsion: node => 45000,
       // Ideal edge (non nested) length
@@ -232,7 +230,7 @@ export class GraphVisualizationComponent implements OnInit, OnDestroy {
     };
     const layout = this.cy.elements().layout(options);
 
-    layout.run();
+    layout.run();*/
 
     this.cy.cxtmenu({
         selector: 'node',

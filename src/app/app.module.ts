@@ -19,10 +19,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { GraphService } from './graph.service';
 
 const appRoutes: Routes = [
-  {path: 'home', component: HomeComponent },
-  {path: 'about', component: AboutComponent },
-  {path: 'graph', component: CytoscapeExplorerComponent },
-  {path: 'contact', component: ContactComponent }
+  { path: '', redirectTo: '/home', pathMatch: 'full'},
+  { path: 'home', component: HomeComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'graph', component: CytoscapeExplorerComponent },
+  { path: 'contact', component: ContactComponent },
+  { path: '**', component: HomeComponent },
 ]
 
 @NgModule({
